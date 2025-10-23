@@ -2,7 +2,7 @@
 
 A modern, minimalistic website featuring a stunning Three.js particle whale animation in the hero section.
 
-Live URL: whale-circle.netlify.app
+Live URL: <a href="whale-circle.netlify.app">whale-circle.netlify.app</a>
 
 ## Features
 
