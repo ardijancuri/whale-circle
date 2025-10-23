@@ -2,6 +2,8 @@
 
 A modern, minimalistic website featuring a stunning Three.js particle whale animation in the hero section.
 
+Live URL: whale-circle.netlify.app
+
 ## Features
 
 - **Three.js Particle Whale**: Interactive 3D whale made of particles that responds to mouse movement
