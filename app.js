@@ -331,6 +331,11 @@ function setupMobileNav() {
       e.stopPropagation();
       hamburger.classList.toggle('active');
       navMenu.classList.toggle('active');
+
+      // Refresh ScrollTrigger after menu state changes
+      if (typeof ScrollTrigger !== 'undefined') {
+        ScrollTrigger.refresh();
+      }
     });
 
     // Close menu when clicking on a link
@@ -338,6 +343,11 @@ function setupMobileNav() {
       link.addEventListener('click', () => {
         hamburger.classList.remove('active');
         navMenu.classList.remove('active');
+
+        // Refresh ScrollTrigger after menu closes
+        if (typeof ScrollTrigger !== 'undefined') {
+          ScrollTrigger.refresh();
+        }
       });
     });
 
@@ -346,6 +356,11 @@ function setupMobileNav() {
       if (!hamburger.contains(e.target) && !navMenu.contains(e.target)) {
         hamburger.classList.remove('active');
         navMenu.classList.remove('active');
+
+        // Refresh ScrollTrigger after menu closes
+        if (typeof ScrollTrigger !== 'undefined') {
+          ScrollTrigger.refresh();
+        }
       }
     });
   }
