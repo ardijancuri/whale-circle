@@ -321,14 +321,32 @@ function setupSmoothScroll() {
 // ===================================
 
 function setupMobileNav() {
-  // Mobile menu toggle (if needed)
-  const mobileToggle = document.querySelector('[data-mobile-toggle]');
-  const nav = document.querySelector('.nav-menu');
+  const hamburger = document.querySelector('.hamburger');
+  const navMenu = document.querySelector('.nav-menu');
+  const navLinks = document.querySelectorAll('.nav-menu a');
 
-  if (mobileToggle && nav) {
-    mobileToggle.addEventListener('click', () => {
-      nav.classList.toggle('active');
-      mobileToggle.classList.toggle('active');
+  if (hamburger && navMenu) {
+    // Toggle menu on hamburger click
+    hamburger.addEventListener('click', (e) => {
+      e.stopPropagation();
+      hamburger.classList.toggle('active');
+      navMenu.classList.toggle('active');
+    });
+
+    // Close menu when clicking on a link
+    navLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        hamburger.classList.remove('active');
+        navMenu.classList.remove('active');
+      });
+    });
+
+    // Close menu when clicking outside
+    document.addEventListener('click', (e) => {
+      if (!hamburger.contains(e.target) && !navMenu.contains(e.target)) {
+        hamburger.classList.remove('active');
+        navMenu.classList.remove('active');
+      }
     });
   }
 }
