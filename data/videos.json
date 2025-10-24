@@ -1,0 +1,50 @@
+[
+  {
+    "id": "data-creator-currency-video",
+    "title": "Data is the New Creator Currency",
+    "slug": "data-creator-currency",
+    "youtubeId": "dQw4w9WgXcQ",
+    "description": "Lebogang Monale breaks down why today's media leaders are treating audience insights like equity, and how first-party data is becoming the moat in the creator economy.",
+    "pillars": ["wealth", "media"],
+    "publishedISO": "2025-01-10",
+    "duration": "12:34",
+    "featured": true,
+    "category": "tv-show"
+  },
+  {
+    "id": "building-wealth-emerging-markets",
+    "title": "Building Wealth in Emerging Markets",
+    "slug": "building-wealth-emerging-markets",
+    "youtubeId": "dQw4w9WgXcQ",
+    "description": "An intimate conversation with African investors navigating the unique opportunities and challenges of wealth creation in high-growth economies.",
+    "pillars": ["wealth", "community"],
+    "publishedISO": "2024-12-15",
+    "duration": "18:22",
+    "featured": false,
+    "category": "tv-show"
+  },
+  {
+    "id": "wellness-non-negotiables",
+    "title": "Non-Negotiable Wellness Routines",
+    "slug": "wellness-non-negotiables",
+    "youtubeId": "dQw4w9WgXcQ",
+    "description": "Top executives share the one wellness practice they refuse to skip, no matter how busy their schedule gets.",
+    "pillars": ["wellness"],
+    "publishedISO": "2024-11-20",
+    "duration": "8:45",
+    "featured": false,
+    "category": "insights"
+  },
+  {
+    "id": "community-career-trajectory",
+    "title": "The Community That Changed Everything",
+    "slug": "community-career-trajectory",
+    "youtubeId": "dQw4w9WgXcQ",
+    "description": "Founders and CEOs reveal which communities and relationships had the greatest influence on their career trajectories.",
+    "pillars": ["community", "media"],
+    "publishedISO": "2024-10-05",
+    "duration": "15:11",
+    "featured": true,
+    "category": "insights"
+  }
+]

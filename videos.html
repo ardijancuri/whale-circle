@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Videos - Whale Circle</title>
+    <meta name="description" content="Watch exclusive interviews, insights, and conversations with high-performing executives and founders.">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Videos - Whale Circle">
+    <meta property="og:description" content="Watch exclusive interviews, insights, and conversations with high-performing executives and founders.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://whalecircle.com/videos">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="nav-container">
+            <a href="/" class="nav-logo">
+                <img src="/assets/whale-circle-logo.jpg" alt="Whale Circle" class="logo-image">
+            </a>
+            <ul class="nav-menu">
+                <li><a href="/">Home</a></li>
+                <li><a href="/events.html">Events</a></li>
+                <li><a href="/videos.html" class="active">Videos</a></li>
+                <li><a href="/tv-show.html">TV Show</a></li>
+                <li><a href="/blog.html">Blog</a></li>
+                <li><a href="/press.html">Press</a></li>
+                <li><a href="/contact.html">Contact</a></li>
+            </ul>
+            <a href="/contact.html" class="nav-cta">Join Us</a>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <header class="page-header">
+        <div class="container">
+            <h1 class="page-header-title">Video Library</h1>
+            <p class="page-header-subtitle">
+                Exclusive conversations with high-performing individuals shaping the future of wealth, wellness, community, and media.
+            </p>
+        </div>
+    </header>
+
+    <!-- Videos Section -->
+    <section class="videos-section">
+        <div class="container">
+            <!-- Pillar Filters -->
+            <div id="pillar-filters-container"></div>
+
+            <!-- Videos Grid -->
+            <div id="videos-grid" class="videos-grid">
+                <!-- Videos will be loaded here -->
+            </div>
+
+            <!-- Empty State -->
+            <div id="empty-state" style="display: none; text-align: center; padding: 4rem 0;">
+                <h3 style="font-size: 1.5rem; color: var(--color-text-secondary); margin-bottom: 1rem;">
+                    No videos found
+                </h3>
+                <p style="color: var(--color-text-secondary);">
+                    Try adjusting your filters or check back soon for new content.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- TV Show CTA -->
+    <section style="padding: 4rem 0; background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); text-align: center; color: white;">
+        <div class="container">
+            <h2 style="font-size: 2rem; font-weight: 700; margin-bottom: 1rem;">
+                Watch Whale Circle on CNBC Africa
+            </h2>
+            <p style="font-size: 1.125rem; color: rgba(255, 255, 255, 0.8); margin-bottom: 2rem; max-width: 600px; margin-left: auto; margin-right: auto;">
+                Explore our flagship TV show "Unchartered Waters" featuring in-depth conversations with Africa's top executives.
+            </p>
+            <a href="/tv-show.html" class="btn-primary">Watch the Show</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div>
+                    <div class="footer-logo">
+                        <img src="/assets/whale-circle-logo.jpg" alt="Whale Circle" class="footer-logo-image">
+                    </div>
+                    <p class="footer-tagline">
+                        Connecting high-performing individuals across wealth, wellness, community, and media.
+                    </p>
+                </div>
+                <div class="footer-links">
+                    <div>
+                        <h4 class="footer-title">Navigate</h4>
+                        <ul class="footer-list">
+                            <li><a href="/">Home</a></li>
+                            <li><a href="/events.html">Events</a></li>
+                            <li><a href="/videos.html">Videos</a></li>
+                            <li><a href="/blog.html">Blog</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="footer-title">Connect</h4>
+                        <ul class="footer-list">
+                            <li><a href="/contact.html">Contact</a></li>
+                            <li><a href="/press.html">Press</a></li>
+                            <li><a href="#">LinkedIn</a></li>
+                            <li><a href="#">Instagram</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="footer-title">Legal</h4>
+                        <ul class="footer-list">
+                            <li><a href="#">Privacy Policy</a></li>
+                            <li><a href="#">Terms of Service</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                &copy; 2025 Whale Circle. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="/app.js"></script>
+    <script>
+
+        let allVideos = [];
+
+        async function init() {
+            // Load videos
+            allVideos = await window.WhaleCircle.loadVideos();
+
+            // Sort by date (newest first)
+            allVideos.sort((a, b) => new Date(b.publishedISO) - new Date(a.publishedISO));
+
+            // Setup filters
+            document.getElementById('pillar-filters-container').innerHTML = window.WhaleCircle.createPillarFilters();
+            window.WhaleCircle.setupPillarFilters(renderFilteredVideos);
+
+            // Render videos
+            renderVideos(allVideos);
+        }
+
+        function renderFilteredVideos(activeFilters) {
+            const filtered = window.WhaleCircle.filterItemsByPillars(allVideos, activeFilters);
+            renderVideos(filtered);
+        }
+
+        function renderVideos(videos) {
+            const container = document.getElementById('videos-grid');
+            const emptyState = document.getElementById('empty-state');
+
+            if (videos.length === 0) {
+                container.style.display = 'none';
+                emptyState.style.display = 'block';
+                return;
+            }
+
+            container.style.display = 'grid';
+            emptyState.style.display = 'none';
+
+            container.innerHTML = videos.map(video => createVideoCard(video)).join('');
+        }
+
+        function createVideoCard(video) {
+            const publishDate = window.WhaleCircle.formatDate(video.publishedISO);
+            const embedUrl = window.WhaleCircle.createYouTubeEmbed(video.youtubeId);
+
+            return `
+                <article class="video-card">
+                    <div class="video-thumbnail">
+                        <iframe
+                            src="${embedUrl}"
+                            title="${video.title}"
+                            frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowfullscreen
+                            loading="lazy">
+                        </iframe>
+                    </div>
+                    <div class="video-card-content">
+                        <h2 class="video-title">${video.title}</h2>
+                        <p class="video-description">${video.description}</p>
+                        ${window.WhaleCircle.renderPillarBadges(video.pillars)}
+                        <div class="video-meta">
+                            <span><i class="far fa-calendar"></i> ${publishDate}</span>
+                            <span><i class="far fa-clock"></i> ${video.duration}</span>
+                        </div>
+                    </div>
+                </article>
+            `;
+        }
+
+        // Initialize on page load
+        init();
+    </script>
+</body>
+</html>

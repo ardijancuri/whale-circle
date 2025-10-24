@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog - Whale Circle</title>
+    <meta name="description" content="Insights on wealth creation, wellness, community building, and media influence from Whale Circle.">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Blog - Whale Circle">
+    <meta property="og:description" content="Insights on wealth creation, wellness, community building, and media influence.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://whalecircle.com/blog">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="nav-container">
+            <a href="/" class="nav-logo">
+                <img src="/assets/whale-circle-logo.jpg" alt="Whale Circle" class="logo-image">
+            </a>
+            <ul class="nav-menu">
+                <li><a href="/">Home</a></li>
+                <li><a href="/events.html">Events</a></li>
+                <li><a href="/videos.html">Videos</a></li>
+                <li><a href="/tv-show.html">TV Show</a></li>
+                <li><a href="/blog.html" class="active">Blog</a></li>
+                <li><a href="/press.html">Press</a></li>
+                <li><a href="/contact.html">Contact</a></li>
+            </ul>
+            <a href="/contact.html" class="nav-cta">Join Us</a>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <header class="page-header">
+        <div class="container">
+            <h1 class="page-header-title">Insights & Ideas</h1>
+            <p class="page-header-subtitle">
+                Thought leadership on the intersection of wealth, wellness, community, and media from the Whale Circle team and contributors.
+            </p>
+        </div>
+    </header>
+
+    <!-- Blog Section -->
+    <section class="blog-section">
+        <div class="container">
+            <!-- Pillar Filters -->
+            <div id="pillar-filters-container"></div>
+
+            <!-- Blog Grid -->
+            <div id="blog-grid" class="blog-grid">
+                <!-- Blog posts will be loaded here -->
+            </div>
+
+            <!-- Empty State -->
+            <div id="empty-state" style="display: none; text-align: center; padding: 4rem 0;">
+                <h3 style="font-size: 1.5rem; color: var(--color-text-secondary); margin-bottom: 1rem;">
+                    No posts found
+                </h3>
+                <p style="color: var(--color-text-secondary);">
+                    Try adjusting your filters or check back soon for new content.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter CTA -->
+    <section style="padding: 4rem 0; background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); text-align: center; color: white;">
+        <div class="container" style="max-width: 600px;">
+            <h2 style="font-size: 2rem; font-weight: 700; margin-bottom: 1rem;">
+                Never Miss an Insight
+            </h2>
+            <p style="font-size: 1.125rem; color: rgba(255, 255, 255, 0.8); margin-bottom: 2rem;">
+                Get our latest articles and exclusive content delivered directly to your inbox.
+            </p>
+            <a href="/contact.html?subject=newsletter" class="btn-primary">Subscribe to Updates</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div>
+                    <div class="footer-logo">
+                        <img src="/assets/whale-circle-logo.jpg" alt="Whale Circle" class="footer-logo-image">
+                    </div>
+                    <p class="footer-tagline">
+                        Connecting high-performing individuals across wealth, wellness, community, and media.
+                    </p>
+                </div>
+                <div class="footer-links">
+                    <div>
+                        <h4 class="footer-title">Navigate</h4>
+                        <ul class="footer-list">
+                            <li><a href="/">Home</a></li>
+                            <li><a href="/events.html">Events</a></li>
+                            <li><a href="/videos.html">Videos</a></li>
+                            <li><a href="/blog.html">Blog</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="footer-title">Connect</h4>
+                        <ul class="footer-list">
+                            <li><a href="/contact.html">Contact</a></li>
+                            <li><a href="/press.html">Press</a></li>
+                            <li><a href="#">LinkedIn</a></li>
+                            <li><a href="#">Instagram</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="footer-title">Legal</h4>
+                        <ul class="footer-list">
+                            <li><a href="#">Privacy Policy</a></li>
+                            <li><a href="#">Terms of Service</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                &copy; 2025 Whale Circle. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="/app.js"></script>
+    <script>
+
+        let allPosts = [];
+
+        async function init() {
+            // Load posts
+            allPosts = await window.WhaleCircle.loadPosts();
+
+            // Sort by date (newest first)
+            allPosts.sort((a, b) => new Date(b.date) - new Date(a.date));
+
+            // Setup filters
+            document.getElementById('pillar-filters-container').innerHTML = window.WhaleCircle.createPillarFilters();
+            window.WhaleCircle.setupPillarFilters(renderFilteredPosts);
+
+            // Render posts
+            renderPosts(allPosts);
+        }
+
+        function renderFilteredPosts(activeFilters) {
+            const filtered = window.WhaleCircle.filterItemsByPillars(allPosts, activeFilters);
+            renderPosts(filtered);
+        }
+
+        function renderPosts(posts) {
+            const container = document.getElementById('blog-grid');
+            const emptyState = document.getElementById('empty-state');
+
+            if (posts.length === 0) {
+                container.style.display = 'none';
+                emptyState.style.display = 'block';
+                return;
+            }
+
+            container.style.display = 'grid';
+            emptyState.style.display = 'none';
+
+            container.innerHTML = posts.map(post => createBlogCard(post)).join('');
+        }
+
+        function createBlogCard(post) {
+            const postDate = window.WhaleCircle.formatDate(post.date);
+
+            return `
+                <article class="blog-card">
+                    <img src="${post.image}" alt="${post.title}" class="blog-card-image" loading="lazy">
+                    <div class="blog-card-content">
+                        <div class="blog-meta">
+                            <span><i class="far fa-calendar"></i> ${postDate}</span>
+                            <span><i class="fas fa-user"></i> ${post.author}</span>
+                        </div>
+                        <h2 class="blog-title">${post.title}</h2>
+                        <p class="blog-excerpt">${post.excerpt}</p>
+                        ${window.WhaleCircle.renderPillarBadges(post.pillars)}
+                        <a href="/blog-post.html?slug=${post.slug}" class="btn-read-more">
+                            Read More →
+                        </a>
+                    </div>
+                </article>
+            `;
+        }
+
+        // Initialize on page load
+        init();
+    </script>
+</body>
+</html>

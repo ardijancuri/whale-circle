@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Whale Circle Admin</title>
+    <link rel="stylesheet" href="/styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="admin-container">
+        <!-- Header -->
+        <div class="admin-header">
+            <h1 class="admin-title">Whale Circle Admin</h1>
+            <button class="btn-logout" onclick="logout()">Logout</button>
+        </div>
+
+        <!-- Navigation -->
+        <nav class="admin-nav">
+            <button class="admin-nav-btn active" data-section="overview">Overview</button>
+            <button class="admin-nav-btn" data-section="events">Events</button>
+            <button class="admin-nav-btn" data-section="posts">Blog Posts</button>
+            <button class="admin-nav-btn" data-section="videos">Videos</button>
+            <button class="admin-nav-btn" data-section="press">Press</button>
+            <button class="admin-nav-btn" data-section="help">Help</button>
+        </nav>
+
+        <!-- Overview Section -->
+        <div id="overview-section" class="admin-section">
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin-bottom: 2rem;">
+                <div style="background: white; padding: 2rem; border-radius: 16px; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);">
+                    <div style="font-size: 0.875rem; color: var(--color-text-secondary); margin-bottom: 0.5rem;">Total Events</div>
+                    <div id="total-events" style="font-size: 2.5rem; font-weight: 700; color: var(--color-primary);">0</div>
+                    <a href="#" onclick="showSection('events'); return false;" style="color: var(--color-accent); font-size: 0.875rem; font-weight: 600;">View all →</a>
+                </div>
+
+                <div style="background: white; padding: 2rem; border-radius: 16px; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);">
+                    <div style="font-size: 0.875rem; color: var(--color-text-secondary); margin-bottom: 0.5rem;">Blog Posts</div>
+                    <div id="total-posts" style="font-size: 2.5rem; font-weight: 700; color: var(--color-primary);">0</div>
+                    <a href="#" onclick="showSection('posts'); return false;" style="color: var(--color-accent); font-size: 0.875rem; font-weight: 600;">View all →</a>
+                </div>
+
+                <div style="background: white; padding: 2rem; border-radius: 16px; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);">
+                    <div style="font-size: 0.875rem; color: var(--color-text-secondary); margin-bottom: 0.5rem;">Videos</div>
+                    <div id="total-videos" style="font-size: 2.5rem; font-weight: 700; color: var(--color-primary);">0</div>
+                    <a href="#" onclick="showSection('videos'); return false;" style="color: var(--color-accent); font-size: 0.875rem; font-weight: 600;">View all →</a>
+                </div>
+
+                <div style="background: white; padding: 2rem; border-radius: 16px; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);">
+                    <div style="font-size: 0.875rem; color: var(--color-text-secondary); margin-bottom: 0.5rem;">Press Items</div>
+                    <div id="total-press" style="font-size: 2.5rem; font-weight: 700; color: var(--color-primary);">0</div>
+                    <a href="#" onclick="showSection('press'); return false;" style="color: var(--color-accent); font-size: 0.875rem; font-weight: 600;">View all →</a>
+                </div>
+            </div>
+
+            <div style="background: linear-gradient(135deg, rgba(143, 211, 254, 0.1) 0%, rgba(211, 181, 116, 0.1) 100%); padding: 2rem; border-radius: 16px; border: 1px solid rgba(143, 211, 254, 0.2);">
+                <h2 style="font-size: 1.5rem; font-weight: 700; margin-bottom: 1rem;">Quick Actions</h2>
+                <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+                    <button onclick="window.open('/', '_blank')" class="btn-primary">
+                        🌐 View Website
+                    </button>
+                    <button onclick="downloadBackup()" class="btn-secondary">
+                        💾 Download All Data
+                    </button>
+                    <a href="/admin/README.md" target="_blank" class="btn-secondary">
+                        📖 View Documentation
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Events Section -->
+        <div id="events-section" class="admin-section" style="display: none;">
+            <h2 style="font-size: 1.5rem; font-weight: 700; margin-bottom: 1rem;">Manage Events</h2>
+            <div id="events-table"></div>
+        </div>
+
+        <!-- Posts Section -->
+        <div id="posts-section" class="admin-section" style="display: none;">
+            <h2 style="font-size: 1.5rem; font-weight: 700; margin-bottom: 1rem;">Manage Blog Posts</h2>
+            <div id="posts-table"></div>
+        </div>
+
+        <!-- Videos Section -->
+        <div id="videos-section" class="admin-section" style="display: none;">
+            <h2 style="font-size: 1.5rem; font-weight: 700; margin-bottom: 1rem;">Manage Videos</h2>
+            <div id="videos-table"></div>
+        </div>
+
+        <!-- Press Section -->
+        <div id="press-section" class="admin-section" style="display: none;">
+            <h2 style="font-size: 1.5rem; font-weight: 700; margin-bottom: 1rem;">Manage Press Coverage</h2>
+            <div id="press-table"></div>
+        </div>
+
+        <!-- Help Section -->
+        <div id="help-section" class="admin-section" style="display: none;">
+            <h2 style="font-size: 1.5rem; font-weight: 700; margin-bottom: 1rem;">Help & Documentation</h2>
+
+            <div style="background: white; padding: 2rem; border-radius: 16px; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08); margin-bottom: 1.5rem;">
+                <h3 style="font-size: 1.25rem; font-weight: 700; margin-bottom: 1rem;">How to Edit Content</h3>
+                <ol style="line-height: 1.8; color: var(--color-text-secondary); padding-left: 1.5rem;">
+                    <li>Content is stored in <code>/data/*.json</code> files</li>
+                    <li>Edit JSON files directly using a text editor or GitHub</li>
+                    <li>Follow the schema documented in <a href="/admin/README.md" target="_blank" style="color: var(--color-accent);">README.md</a></li>
+                    <li>Test changes locally before deploying</li>
+                    <li>Deploy via Git push or FTP</li>
+                </ol>
+            </div>
+
+            <div style="background: white; padding: 2rem; border-radius: 16px; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);">
+                <h3 style="font-size: 1.25rem; font-weight: 700; margin-bottom: 1rem;">Content Files</h3>
+                <ul style="list-style: none; padding: 0;">
+                    <li style="padding: 0.75rem; border-bottom: 1px solid rgba(14, 17, 22, 0.05);">
+                        <a href="/data/events.json" target="_blank" style="color: var(--color-accent); font-weight: 600;">
+                            📅 events.json
+                        </a>
+                        <span style="color: var(--color-text-secondary); margin-left: 0.5rem;">- Events and gatherings</span>
+                    </li>
+                    <li style="padding: 0.75rem; border-bottom: 1px solid rgba(14, 17, 22, 0.05);">
+                        <a href="/data/posts.json" target="_blank" style="color: var(--color-accent); font-weight: 600;">
+                            ✍️ posts.json
+                        </a>
+                        <span style="color: var(--color-text-secondary); margin-left: 0.5rem;">- Blog posts and articles</span>
+                    </li>
+                    <li style="padding: 0.75rem; border-bottom: 1px solid rgba(14, 17, 22, 0.05);">
+                        <a href="/data/videos.json" target="_blank" style="color: var(--color-accent); font-weight: 600;">
+                            📺 videos.json
+                        </a>
+                        <span style="color: var(--color-text-secondary); margin-left: 0.5rem;">- Video content and episodes</span>
+                    </li>
+                    <li style="padding: 0.75rem;">
+                        <a href="/data/press.json" target="_blank" style="color: var(--color-accent); font-weight: 600;">
+                            📰 press.json
+                        </a>
+                        <span style="color: var(--color-text-secondary); margin-left: 0.5rem;">- Press coverage and mentions</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <script src="/app.js"></script>
+    <script>
+        // Check authentication
+        if (sessionStorage.getItem('whale_admin_auth') !== 'true') {
+            window.location.href = '/admin/';
+        }
+
+        const { loadEvents, loadPosts, loadVideos, loadPress, renderPillarBadges, formatDate } = window.WhaleCircle;
+
+        // Logout function
+        function logout() {
+            sessionStorage.removeItem('whale_admin_auth');
+            window.location.href = '/admin/';
+        }
+
+        // Load all data
+        async function loadDashboard() {
+            const events = await loadEvents();
+            const posts = await loadPosts();
+            const videos = await loadVideos();
+            const press = await loadPress();
+
+            // Update counts
+            document.getElementById('total-events').textContent = events.length;
+            document.getElementById('total-posts').textContent = posts.length;
+            document.getElementById('total-videos').textContent = videos.length;
+            document.getElementById('total-press').textContent = press.length;
+
+            // Render tables
+            renderEventsTable(events);
+            renderPostsTable(posts);
+            renderVideosTable(videos);
+            renderPressTable(press);
+        }
+
+        function renderEventsTable(events) {
+            const container = document.getElementById('events-table');
+            container.innerHTML = `
+                <div class="admin-table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Title</th>
+                                <th>Date</th>
+                                <th>City</th>
+                                <th>Pillars</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            ${events.map(event => `
+                                <tr>
+                                    <td><strong>${event.title}</strong></td>
+                                    <td>${formatDate(event.start)}</td>
+                                    <td>${event.city}</td>
+                                    <td>${renderPillarBadges(event.pillars)}</td>
+                                    <td><span style="color: ${event.isPast ? '#999' : '#4CAF50'};">${event.isPast ? 'Past' : 'Upcoming'}</span></td>
+                                </tr>
+                            `).join('')}
+                        </tbody>
+                    </table>
+                </div>
+            `;
+        }
+
+        function renderPostsTable(posts) {
+            const container = document.getElementById('posts-table');
+            container.innerHTML = `
+                <div class="admin-table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Title</th>
+                                <th>Author</th>
+                                <th>Date</th>
+                                <th>Pillars</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            ${posts.map(post => `
+                                <tr>
+                                    <td><strong>${post.title}</strong></td>
+                                    <td>${post.author}</td>
+                                    <td>${formatDate(post.date)}</td>
+                                    <td>${renderPillarBadges(post.pillars)}</td>
+                                </tr>
+                            `).join('')}
+                        </tbody>
+                    </table>
+                </div>
+            `;
+        }
+
+        function renderVideosTable(videos) {
+            const container = document.getElementById('videos-table');
+            container.innerHTML = `
+                <div class="admin-table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Title</th>
+                                <th>Duration</th>
+                                <th>Published</th>
+                                <th>Pillars</th>
+                                <th>Category</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            ${videos.map(video => `
+                                <tr>
+                                    <td><strong>${video.title}</strong></td>
+                                    <td>${video.duration}</td>
+                                    <td>${formatDate(video.publishedISO)}</td>
+                                    <td>${renderPillarBadges(video.pillars)}</td>
+                                    <td>${video.category}</td>
+                                </tr>
+                            `).join('')}
+                        </tbody>
+                    </table>
+                </div>
+            `;
+        }
+
+        function renderPressTable(pressItems) {
+            const container = document.getElementById('press-table');
+            container.innerHTML = `
+                <div class="admin-table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Title</th>
+                                <th>Outlet</th>
+                                <th>Date</th>
+                                <th>Pillars</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            ${pressItems.map(item => `
+                                <tr>
+                                    <td><strong>${item.title}</strong></td>
+                                    <td>${item.outlet}</td>
+                                    <td>${formatDate(item.date)}</td>
+                                    <td>${renderPillarBadges(item.pillars)}</td>
+                                </tr>
+                            `).join('')}
+                        </tbody>
+                    </table>
+                </div>
+            `;
+        }
+
+        // Section navigation
+        document.querySelectorAll('.admin-nav-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const section = btn.dataset.section;
+                showSection(section);
+            });
+        });
+
+        function showSection(section) {
+            // Hide all sections
+            document.querySelectorAll('.admin-section').forEach(s => s.style.display = 'none');
+
+            // Show selected section
+            document.getElementById(`${section}-section`).style.display = 'block';
+
+            // Update nav
+            document.querySelectorAll('.admin-nav-btn').forEach(btn => {
+                btn.classList.toggle('active', btn.dataset.section === section);
+            });
+        }
+
+        // Download backup
+        function downloadBackup() {
+            Promise.all([loadEvents(), loadPosts(), loadVideos(), loadPress()])
+                .then(([events, posts, videos, press]) => {
+                    const backup = {
+                        timestamp: new Date().toISOString(),
+                        events,
+                        posts,
+                        videos,
+                        press
+                    };
+
+                    const blob = new Blob([JSON.stringify(backup, null, 2)], { type: 'application/json' });
+                    const url = URL.createObjectURL(blob);
+                    const a = document.createElement('a');
+                    a.href = url;
+                    a.download = `whale-circle-backup-${new Date().toISOString().split('T')[0]}.json`;
+                    document.body.appendChild(a);
+                    a.click();
+                    document.body.removeChild(a);
+                    URL.revokeObjectURL(url);
+                });
+        }
+
+        // Initialize
+        loadDashboard();
+    </script>
+</body>
+</html>

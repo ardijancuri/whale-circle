@@ -1,0 +1,32 @@
+[
+  {
+    "id": "cnbc-africa-whale-circle-launch",
+    "title": "CNBC Africa Announces 'Whale Circle: Unchartered Waters'",
+    "outlet": "CNBC Africa",
+    "date": "2025-01-20",
+    "url": "https://www.cnbcafrica.com/whale-circle-show",
+    "image": "https://images.unsplash.com/photo-1522869635100-9f4c5e86aa37?w=800&h=600&fit=crop",
+    "excerpt": "New series explores the intersection of wealth, wellness, and influence among Africa's leading executives and entrepreneurs.",
+    "pillars": ["media", "wealth"]
+  },
+  {
+    "id": "forbes-lebogang-profile",
+    "title": "Meet the Founder Building Africa's Most Exclusive Network",
+    "outlet": "Forbes Africa",
+    "date": "2024-11-15",
+    "url": "https://www.forbesafrica.com",
+    "image": "https://images.unsplash.com/photo-1507679799987-c73779587ccf?w=800&h=600&fit=crop",
+    "excerpt": "Lebogang Monale on creating Whale Circle and redefining executive communities across emerging markets.",
+    "pillars": ["community", "wealth"]
+  },
+  {
+    "id": "techcabal-whale-circle",
+    "title": "Inside Whale Circle: Where Founders Actually Want to Network",
+    "outlet": "TechCabal",
+    "date": "2024-09-10",
+    "url": "https://techcabal.com",
+    "image": "https://images.unsplash.com/photo-1556761175-b413da4baf72?w=800&h=600&fit=crop",
+    "excerpt": "How a private community is changing the game for executive networking in Africa's tech scene.",
+    "pillars": ["community", "media"]
+  }
+]
