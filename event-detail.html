@@ -27,7 +27,7 @@
         <nav class="nav">
         <div class="nav-container">
             <a href="/" class="nav-logo">
-                <img src="/assets/whale-circle-logo.jpg" alt="Whale Circle" class="logo-image">
+                <img src="/whale-logo.svg" alt="Whale Circle" class="logo-image">
             </a>
 
             <!-- Hamburger Menu Icon -->
@@ -74,13 +74,15 @@
         </div>
     </main>
 
+    <div class="section-divider"></div>
+
     <!-- Footer -->
     <footer class="footer">
         <div class="container">
             <div class="footer-content">
                 <div>
                     <div class="footer-logo">
-                        <img src="/assets/whale-circle-logo.jpg" alt="Whale Circle" class="footer-logo-image">
+                        <img src="/whale-logo.svg" alt="Whale Circle" class="footer-logo-image">
                     </div>
                     <p class="footer-tagline">
                         Connecting high-performing individuals across wealth, wellness, community, and media.
@@ -161,7 +163,7 @@
                 <div class="event-detail-grid">
                     <!-- Main Content -->
                     <div>
-                        <h1 style="font-size: 3rem; font-weight: 700; color: var(--color-primary); margin-bottom: 1rem; line-height: 1.2;">
+                        <h1 style="font-size: 3rem; font-weight: 700; color: var(--color-text-primary); margin-bottom: 1rem; line-height: 1.2;">
                             ${event.title}
                         </h1>
 
@@ -238,7 +240,7 @@
                             ${!event.isPast ? `
                                 <div class="event-actions">
                                     <a href="${event.rsvpLink}" class="btn-primary btn-full">RSVP</a>
-                                    <button onclick="addToCalendar()" class="btn-add-calendar">
+                                    <button onclick="addToCalendar()" class="btn-add-calendar" style="background: linear-gradient(135deg, rgba(143, 211, 254, 0.2) 0%, rgba(143, 211, 254, 0.1) 100%); color: var(--color-accent); border: 1px solid var(--color-border); padding: 0.75rem 1rem; border-radius: 8px; font-weight: 600; cursor: pointer; transition: all 0.3s ease; width: 100%;">
                                         <i class="far fa-calendar-plus"></i> Add to Calendar
                                     </button>
                                 </div>
@@ -247,7 +249,7 @@
 
                         ${!event.isPast ? `
                             <div style="margin-top: 1.5rem; padding: 1.5rem; background: white; border-radius: 16px; border: 1px solid rgba(14, 17, 22, 0.1);">
-                                <h4 style="font-size: 1rem; font-weight: 700; margin-bottom: 1rem;">Share This Event</h4>
+                                <h4 style="font-size: 1rem; font-weight: 700; margin-bottom: 1rem; color: var(--color-primary);">Share This Event</h4>
                                 <div style="display: flex; gap: 0.5rem;">
                                     <button onclick="shareOnLinkedIn()" style="flex: 1; padding: 0.5rem; background: #0077B5; color: white; border-radius: 8px; font-weight: 600;">
                                         LinkedIn

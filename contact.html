@@ -22,13 +22,25 @@
 
     <!-- Styles -->
     <link rel="stylesheet" href="/styles.css">
+    <style>
+        @media (max-width: 768px) {
+            .four-pillars-grid {
+                grid-template-columns: 1fr !important;
+            }
+        }
+        @media (min-width: 769px) and (max-width: 1024px) {
+            .four-pillars-grid {
+                grid-template-columns: repeat(2, 1fr) !important;
+            }
+        }
+    </style>
 </head>
 <body>
     <!-- Navigation -->
         <nav class="nav">
         <div class="nav-container">
             <a href="/" class="nav-logo">
-                <img src="/assets/whale-circle-logo.jpg" alt="Whale Circle" class="logo-image">
+                <img src="/whale-logo.svg" alt="Whale Circle" class="logo-image">
             </a>
 
             <!-- Hamburger Menu Icon -->
@@ -101,13 +113,13 @@
                             <div>
                                 <div class="contact-label">Social Media</div>
                                 <div style="display: flex; gap: 1rem; margin-top: 0.5rem;">
-                                    <a href="#" style="color: var(--color-primary); font-weight: 600; display: inline-flex; align-items: center; gap: 0.25rem; transition: opacity 0.2s;">
+                                    <a href="#" style="color: var(--color-accent); font-weight: 600; display: inline-flex; align-items: center; gap: 0.25rem; transition: all 0.3s;">
                                         <i class="fab fa-linkedin"></i> LinkedIn
                                     </a>
-                                    <a href="#" style="color: var(--color-primary); font-weight: 600; display: inline-flex; align-items: center; gap: 0.25rem; transition: opacity 0.2s;">
+                                    <a href="#" style="color: var(--color-accent); font-weight: 600; display: inline-flex; align-items: center; gap: 0.25rem; transition: all 0.3s;">
                                         <i class="fab fa-instagram"></i> Instagram
                                     </a>
-                                    <a href="#" style="color: var(--color-primary); font-weight: 600; display: inline-flex; align-items: center; gap: 0.25rem; transition: opacity 0.2s;">
+                                    <a href="#" style="color: var(--color-accent); font-weight: 600; display: inline-flex; align-items: center; gap: 0.25rem; transition: all 0.3s;">
                                         <i class="fab fa-twitter"></i> Twitter
                                     </a>
                                 </div>
@@ -115,21 +127,21 @@
                         </div>
                     </div>
 
-                    <div style="margin-top: 2rem; padding: 1.5rem; background: white; border-radius: 16px; border: 1px solid rgba(14, 17, 22, 0.1);">
-                        <h3 style="font-size: 1rem; font-weight: 700; margin-bottom: 1rem;">Quick Links</h3>
+                    <div style="margin-top: 2rem; padding: 1.5rem; background: linear-gradient(135deg, var(--color-card-bg) 0%, var(--color-bg-dark) 100%); border-radius: 16px; border: 1px solid var(--color-border);">
+                        <h3 style="font-size: 1rem; font-weight: 700; margin-bottom: 1rem; color: var(--color-text-primary);">Quick Links</h3>
                         <ul style="list-style: none; display: flex; flex-direction: column; gap: 0.75rem;">
                             <li>
-                                <a href="/events.html" style="color: var(--color-primary); display: inline-flex; align-items: center; gap: 0.5rem; transition: opacity 0.2s;">
+                                <a href="/events.html" style="color: var(--color-accent); display: inline-flex; align-items: center; gap: 0.5rem; transition: all 0.3s;">
                                     <i class="fas fa-calendar-alt"></i> View Upcoming Events
                                 </a>
                             </li>
                             <li>
-                                <a href="/tv-show.html" style="color: var(--color-primary); display: inline-flex; align-items: center; gap: 0.5rem; transition: opacity 0.2s;">
+                                <a href="/tv-show.html" style="color: var(--color-accent); display: inline-flex; align-items: center; gap: 0.5rem; transition: all 0.3s;">
                                     <i class="fas fa-tv"></i> Watch Our TV Show
                                 </a>
                             </li>
                             <li>
-                                <a href="/blog.html" style="color: var(--color-primary); display: inline-flex; align-items: center; gap: 0.5rem; transition: opacity 0.2s;">
+                                <a href="/blog.html" style="color: var(--color-accent); display: inline-flex; align-items: center; gap: 0.5rem; transition: all 0.3s;">
                                     <i class="fas fa-book-open"></i> Read Our Blog
                                 </a>
                             </li>
@@ -207,50 +219,52 @@
     </main>
 
     <!-- Four Pillars Info -->
-    <section style="padding: 3rem 0; background: linear-gradient(135deg, rgba(143, 211, 254, 0.05) 0%, rgba(211, 181, 116, 0.05) 100%);">
+    <section style="padding: 3rem 0; background: linear-gradient(135deg, var(--color-bg-dark) 0%, var(--color-card-bg) 100%);">
         <div class="container" style="max-width: 1200px;">
-            <h2 style="font-size: 1.75rem; font-weight: 700; text-align: center; margin-bottom: 1rem;">
+            <h2 style="font-size: 1.75rem; font-weight: 700; text-align: center; margin-bottom: 1rem; color: var(--color-text-primary);">
                 The Four Pillars
             </h2>
             <p style="font-size: 1rem; text-align: center; color: var(--color-text-secondary); margin-bottom: 2rem;">
                 Connecting high-performing individuals across four key areas
             </p>
 
-            <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem;">
-                <div style="text-align: center; padding: 1.5rem; background: white; border-radius: 12px; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);">
+            <div class="four-pillars-grid" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem;">
+                <div style="text-align: center; padding: 1.5rem; background: var(--color-card-bg); border-radius: 12px; border: 1px solid var(--color-border); transition: all 0.3s;">
                     <div style="width: 50px; height: 50px; margin: 0 auto 0.75rem; background: linear-gradient(135deg, rgba(211, 181, 116, 0.15) 0%, rgba(211, 181, 116, 0.25) 100%); border-radius: 12px; display: flex; align-items: center; justify-content: center;">
                         <i class="fas fa-chart-line" style="font-size: 1.5rem; color: #D3B574;"></i>
                     </div>
-                    <h3 style="font-size: 1rem; font-weight: 700; margin-bottom: 0.5rem;">Wealth & Alpha</h3>
+                    <h3 style="font-size: 1rem; font-weight: 700; margin-bottom: 0.5rem; color: var(--color-text-primary);">Wealth & Alpha</h3>
                     <p style="font-size: 0.8125rem; color: var(--color-text-secondary);">Financial insights & strategies</p>
                 </div>
 
-                <div style="text-align: center; padding: 1.5rem; background: white; border-radius: 12px; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);">
+                <div style="text-align: center; padding: 1.5rem; background: var(--color-card-bg); border-radius: 12px; border: 1px solid var(--color-border); transition: all 0.3s;">
                     <div style="width: 50px; height: 50px; margin: 0 auto 0.75rem; background: linear-gradient(135deg, rgba(76, 175, 80, 0.15) 0%, rgba(76, 175, 80, 0.25) 100%); border-radius: 12px; display: flex; align-items: center; justify-content: center;">
                         <i class="fas fa-heartbeat" style="font-size: 1.5rem; color: #4CAF50;"></i>
                     </div>
-                    <h3 style="font-size: 1rem; font-weight: 700; margin-bottom: 0.5rem;">Wellness & Fitness</h3>
+                    <h3 style="font-size: 1rem; font-weight: 700; margin-bottom: 0.5rem; color: var(--color-text-primary);">Wellness & Fitness</h3>
                     <p style="font-size: 0.8125rem; color: var(--color-text-secondary);">Performance & vitality</p>
                 </div>
 
-                <div style="text-align: center; padding: 1.5rem; background: white; border-radius: 12px; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);">
+                <div style="text-align: center; padding: 1.5rem; background: var(--color-card-bg); border-radius: 12px; border: 1px solid var(--color-border); transition: all 0.3s;">
                     <div style="width: 50px; height: 50px; margin: 0 auto 0.75rem; background: linear-gradient(135deg, rgba(143, 211, 254, 0.15) 0%, rgba(143, 211, 254, 0.25) 100%); border-radius: 12px; display: flex; align-items: center; justify-content: center;">
                         <i class="fas fa-users" style="font-size: 1.5rem; color: #8FD3FE;"></i>
                     </div>
-                    <h3 style="font-size: 1rem; font-weight: 700; margin-bottom: 0.5rem;">Community & Culture</h3>
+                    <h3 style="font-size: 1rem; font-weight: 700; margin-bottom: 0.5rem; color: var(--color-text-primary);">Community & Culture</h3>
                     <p style="font-size: 0.8125rem; color: var(--color-text-secondary);">Connections & collaboration</p>
                 </div>
 
-                <div style="text-align: center; padding: 1.5rem; background: white; border-radius: 12px; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);">
+                <div style="text-align: center; padding: 1.5rem; background: var(--color-card-bg); border-radius: 12px; border: 1px solid var(--color-border); transition: all 0.3s;">
                     <div style="width: 50px; height: 50px; margin: 0 auto 0.75rem; background: linear-gradient(135deg, rgba(156, 39, 176, 0.15) 0%, rgba(156, 39, 176, 0.25) 100%); border-radius: 12px; display: flex; align-items: center; justify-content: center;">
                         <i class="fas fa-broadcast-tower" style="font-size: 1.5rem; color: #9C27B0;"></i>
                     </div>
-                    <h3 style="font-size: 1rem; font-weight: 700; margin-bottom: 0.5rem;">Media & Influence</h3>
+                    <h3 style="font-size: 1rem; font-weight: 700; margin-bottom: 0.5rem; color: var(--color-text-primary);">Media & Influence</h3>
                     <p style="font-size: 0.8125rem; color: var(--color-text-secondary);">Leadership & impact</p>
                 </div>
             </div>
         </div>
     </section>
+
+    <div class="section-divider"></div>
 
     <!-- Footer -->
     <footer class="footer">
@@ -258,7 +272,7 @@
             <div class="footer-content">
                 <div>
                     <div class="footer-logo">
-                        <img src="/assets/whale-circle-logo.jpg" alt="Whale Circle" class="footer-logo-image">
+                        <img src="/whale-logo.svg" alt="Whale Circle" class="footer-logo-image">
                     </div>
                     <p class="footer-tagline">
                         Connecting high-performing individuals across wealth, wellness, community, and media.
