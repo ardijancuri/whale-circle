@@ -164,8 +164,8 @@
             const pastEvents = allEvents.filter(event => event.isPast);
 
             // Setup filters
-            document.getElementById('pillar-filters-container').innerHTML = window.WhaleCircle.window.WhaleCircle.createPillarFilters();
-            window.WhaleCircle.window.WhaleCircle.setupPillarFilters(renderFilteredEvents);
+            document.getElementById('pillar-filters-container').innerHTML = window.WhaleCircle.createPillarFilters();
+            window.WhaleCircle.setupPillarFilters(renderFilteredEvents);
 
             // Render events
             renderEvents(pastEvents);
@@ -173,7 +173,7 @@
 
         function renderFilteredEvents(activeFilters) {
             const pastEvents = allEvents.filter(event => event.isPast);
-            const filtered = window.WhaleCircle.window.WhaleCircle.filterItemsByPillars(pastEvents, activeFilters);
+            const filtered = window.WhaleCircle.filterItemsByPillars(pastEvents, activeFilters);
             renderEvents(filtered);
         }
 
@@ -194,7 +194,7 @@
         }
 
         function createEventCard(event) {
-            const eventDate = window.WhaleCircle.window.WhaleCircle.formatDate(event.start);
+            const eventDate = window.WhaleCircle.formatDate(event.start);
 
             return `
                 <article class="event-card-full">
@@ -206,7 +206,7 @@
                         </div>
                         <h2 class="event-title">${event.title}</h2>
                         <p class="event-description">${event.description}</p>
-                        ${window.WhaleCircle.window.WhaleCircle.renderPillarBadges(event.pillars)}
+                        ${window.WhaleCircle.renderPillarBadges(event.pillars)}
                         <div class="event-footer">
                             <span style="font-size: 0.875rem; color: var(--color-text-secondary);">
                                 ${event.venue}
