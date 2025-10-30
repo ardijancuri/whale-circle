@@ -56,12 +56,30 @@
     </nav>
 
     <!-- Page Header -->
-    <header class="page-header" style="background: linear-gradient(135deg, #0A0C10 0%, #101D25 100%);">
+    <header class="page-header events-page-header" style="background: linear-gradient(135deg, #0A0C10 0%, #101D25 100%);">
         <div class="container">
-            <h1 class="page-header-title">Upcoming Events</h1>
-            <p class="page-header-subtitle">
-                Join us for exclusive gatherings that connect high-performing individuals across wealth, wellness, community, and media.
-            </p>
+            <div class="events-header-grid">
+                <div class="events-header-content">
+                    <h1 class="page-header-title">Upcoming Events</h1>
+                    <p class="page-header-subtitle">
+                        Join us for exclusive gatherings that connect high-performing individuals across wealth, wellness, community, and media.
+                    </p>
+                </div>
+                <div class="events-calendar-widget">
+                    <div class="calendar-navigation">
+                        <button id="prev-event-date" class="calendar-nav-btn">
+                            <i class="fas fa-chevron-left"></i>
+                        </button>
+                        <h3 id="current-event-date" class="calendar-widget-title">Event Calendar</h3>
+                        <button id="next-event-date" class="calendar-nav-btn">
+                            <i class="fas fa-chevron-right"></i>
+                        </button>
+                    </div>
+                    <div id="current-date-events" class="current-date-events">
+                        <!-- Current date events will be shown here -->
+                    </div>
+                </div>
+            </div>
         </div>
     </header>
 
@@ -153,6 +171,8 @@
     <script src="/app.js"></script>
     <script>
         let allEvents = [];
+        let eventDateGroups = [];
+        let currentDateIndex = 0;
 
         async function init() {
             // Load events
@@ -167,6 +187,100 @@
 
             // Render events
             renderEvents(upcomingEvents);
+
+            // Initialize calendar
+            initEventCalendar(allEvents);
+        }
+
+        function initEventCalendar(events) {
+            if (events.length === 0) {
+                document.getElementById('current-date-events').innerHTML = '<p style="color: var(--color-text-secondary); text-align: center; padding: 2rem;">No events scheduled</p>';
+                return;
+            }
+
+            // Sort events by date
+            const sortedEvents = [...events].sort((a, b) => new Date(a.start) - new Date(b.start));
+
+            // Group events by date
+            const eventsByDate = {};
+            sortedEvents.forEach(event => {
+                const dateKey = window.WhaleCircle.formatDate(event.start);
+                if (!eventsByDate[dateKey]) {
+                    eventsByDate[dateKey] = [];
+                }
+                eventsByDate[dateKey].push(event);
+            });
+
+            // Convert to array of date groups
+            eventDateGroups = Object.entries(eventsByDate).map(([date, dateEvents]) => ({
+                date,
+                events: dateEvents,
+                isPast: new Date(dateEvents[0].start) < new Date()
+            }));
+
+            // Find the index of the closest upcoming event
+            const now = new Date();
+            currentDateIndex = eventDateGroups.findIndex(group => !group.isPast);
+
+            // If no upcoming events, show the last past event
+            if (currentDateIndex === -1) {
+                currentDateIndex = eventDateGroups.length - 1;
+            }
+
+            // Display current date
+            displayCurrentDate();
+
+            // Setup navigation
+            document.getElementById('prev-event-date').addEventListener('click', showPreviousDate);
+            document.getElementById('next-event-date').addEventListener('click', showNextDate);
+        }
+
+        function displayCurrentDate() {
+            if (eventDateGroups.length === 0) return;
+
+            const group = eventDateGroups[currentDateIndex];
+
+            // Update date title
+            document.getElementById('current-event-date').textContent = group.date;
+
+            // Render events for this date
+            const eventsList = group.events.map(event => {
+                const eventTime = window.WhaleCircle.formatTime(event.start);
+                return `
+                    <a href="/event-detail.html?id=${event.id}" class="calendar-event-item">
+                        <div class="calendar-event-time">${eventTime}</div>
+                        <div class="calendar-event-title">${event.title}</div>
+                        <div class="calendar-event-location"><i class="fas fa-map-marker-alt"></i> ${event.city}</div>
+                    </a>
+                `;
+            }).join('');
+
+            document.getElementById('current-date-events').innerHTML = `
+                <div class="calendar-date-badge-container">
+                    <span class="calendar-date-badge ${group.isPast ? 'past-event' : 'upcoming-event'}">${group.isPast ? 'Past Event' : 'Upcoming Event'}</span>
+                </div>
+                <div class="calendar-events-list">
+                    ${eventsList}
+                </div>
+            `;
+
+            // Update button states
+            document.getElementById('prev-event-date').disabled = currentDateIndex === 0;
+            document.getElementById('next-event-date').disabled = currentDateIndex === eventDateGroups.length - 1;
+        }
+
+        function showPreviousDate() {
+            if (currentDateIndex > 0) {
+                currentDateIndex--;
+                displayCurrentDate();
+            }
+        }
+
+        function showNextDate() {
+            if (currentDateIndex < eventDateGroups.length - 1) {
+                currentDateIndex++;
+                displayCurrentDate();
+            }
         }
 
         function renderFilteredEvents(activeFilters) {

@@ -2302,7 +2302,8 @@ img {
     background: linear-gradient(135deg, var(--color-bg-light) 0%, var(--color-bg-dark) 100%);
     border-bottom: 1px solid var(--color-border);
     position: relative;
-    overflow: hidden;
+    overflow: visible;
+    min-height: 500px;
 }
 
 .page-header::before {
@@ -2342,6 +2343,169 @@ img {
     color: var(--color-text-secondary);
     font-weight: 400;
     max-width: 700px;
+}
+
+/* Events Page Header Two-Column Layout */
+.events-header-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-xl);
+    align-items: start;
+    overflow: visible;
+}
+
+.events-header-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+/* Events Calendar Widget */
+.events-calendar-widget {
+    background: rgba(16, 29, 37, 0.6);
+    backdrop-filter: blur(10px);
+    border: 1px solid var(--color-border);
+    border-radius: var(--border-radius);
+    padding: 1rem;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+.calendar-navigation {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 0.75rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--color-border);
+}
+
+.calendar-widget-title {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--color-text-primary);
+    margin: 0;
+    text-align: center;
+    flex: 1;
+}
+
+.calendar-nav-btn {
+    background: rgba(143, 211, 254, 0.1);
+    border: 1px solid var(--color-border);
+    color: var(--color-accent);
+    width: 32px;
+    height: 32px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all var(--transition-base);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.875rem;
+}
+
+.calendar-nav-btn:hover:not(:disabled) {
+    background: var(--color-accent);
+    color: var(--color-primary);
+    border-color: var(--color-accent);
+}
+
+.calendar-nav-btn:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+}
+
+.current-date-events {
+    min-height: auto;
+}
+
+.calendar-date-badge-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 0.75rem;
+}
+
+.calendar-date-badge {
+    font-size: 0.75rem;
+    padding: 3px 10px;
+    border-radius: 4px;
+    font-weight: 600;
+    display: inline-block;
+}
+
+.calendar-date-badge.upcoming-event {
+    background: rgba(143, 211, 254, 0.2);
+    color: var(--color-accent);
+    border: 1px solid var(--color-accent);
+}
+
+.calendar-date-badge.past-event {
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--color-text-secondary);
+    border: 1px solid var(--color-border);
+}
+
+.calendar-events-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.calendar-event-item {
+    background: linear-gradient(135deg, rgba(16, 29, 37, 0.8) 0%, rgba(14, 17, 22, 0.6) 100%);
+    padding: 0.75rem;
+    border-radius: 8px;
+    transition: all var(--transition-base);
+    cursor: pointer;
+    text-decoration: none;
+    display: block;
+    border: 1px solid var(--color-border);
+    border-left: 3px solid var(--color-accent);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.calendar-event-item:hover {
+    background: linear-gradient(135deg, rgba(16, 29, 37, 1) 0%, rgba(14, 17, 22, 0.8) 100%);
+    border-color: var(--color-accent);
+    border-left-color: var(--color-gold);
+    transform: translateX(4px);
+    box-shadow: 0 4px 12px rgba(143, 211, 254, 0.2);
+}
+
+.calendar-event-time {
+    font-size: 0.75rem;
+    color: var(--color-accent);
+    font-weight: 700;
+    margin-bottom: 4px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.calendar-event-title {
+    font-size: 0.9rem;
+    color: var(--color-text-primary);
+    font-weight: 600;
+    line-height: 1.4;
+    margin-bottom: 4px;
+}
+
+.calendar-event-location {
+    font-size: 0.75rem;
+    color: var(--color-text-secondary);
+}
+
+@media (max-width: 968px) {
+    .events-header-grid {
+        grid-template-columns: 1fr;
+        gap: var(--spacing-lg);
+    }
+
+    .calendar-day-number {
+        font-size: 0.75rem;
+    }
+
+    .selected-date-events {
+        max-height: 150px;
+    }
 }
 
 /* ===================================
